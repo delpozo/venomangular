@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Fournisseur } from '../Model/Fournisseur';
-
+import { FournisseursService } from 'src/fournisseurs.service';
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -8,11 +9,12 @@ import { Fournisseur } from '../Model/Fournisseur';
 })
 export class HomeComponent implements OnInit {
   public fournisseurs: Fournisseur[];
-  constructor() { }
+  constructor(public fournisseurservice:FournisseursService) { }
 
   ngOnInit() {
     
-    this.fournisseurs = [{nom: 'seif',prenom : 'bahri'},{nom:'dhaker',prenom:'souid'}]
+    console.log(this.fournisseurservice.getAll().subscribe(data=>{this.fournisseurs=data}));
+   // this.fournisseurs = [{id: 1,nom: 'seif',prenom : 'bahri'},{id:2,nom:'dhaker',prenom:'souid'}]
   }
 
 }
